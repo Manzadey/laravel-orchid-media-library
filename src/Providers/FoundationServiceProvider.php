@@ -24,6 +24,7 @@ class FoundationServiceProvider extends ServiceProvider
         $this->publishes([
             $this->path('stubs/routes') => base_path('routes/platform'),
             $this->path('stubs/app')    => app_path(),
+            $this->path('stubs/images') => public_path('images'),
         ], 'orchid-media-library-stubs');
 
         $this->publishes([
