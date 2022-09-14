@@ -6,13 +6,17 @@ namespace Manzadey\OrchidMediaLibrary\Services;
 
 class MediaService
 {
-    public const NAME = 'Медиа';
+    public const NAME       = 'Медиа';
 
-    public const ICON = 'film';
+    public const ICON       = 'film';
 
-    public const ROUTE_LIST = 'platform.media.list';
+    public const PLURAL     = 'media';
 
-    public const ROUTE_SHOW = 'platform.media.show';
+    public const ROUTE      = 'platform.' . self::PLURAL . '.';
 
-    public const ROUTE_EDIT = 'platform.media.edit';
+    public const ROUTE_LIST = self::ROUTE . 'list';
+
+    public const ROUTE_SHOW = self::ROUTE . 'show';
+
+    public const ROUTE_EDIT = self::ROUTE . 'edit';
 }
