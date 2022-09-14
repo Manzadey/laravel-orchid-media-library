@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
 use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\Alerts\SaveAlert;
 use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\Buttons\SaveButton;
 use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\Layouts\ModelsTableLayout;
@@ -19,7 +20,7 @@ use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\TD\ActionsTD;
 use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\TD\CreatedAtTD;
 use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\TD\EntityRelationTD;
 use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\TD\IdTD;
-use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\TD\UpdateAtTD;
+use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\TD\UpdatedAtTD;
 use Manzadey\LaravelOrchidHelpers\Orchid\Traits\DeleteActionTrait;
 use Manzadey\OrchidMediaLibrary\Models\Media;
 use Manzadey\OrchidMediaLibrary\Orchid\Helpers\TD\ImagePreviewTD;
@@ -110,7 +111,7 @@ abstract class AbstractMediaListScreen extends AbstractScreen
                         ->value($media->getAttribute('order_column') ?? 0)
                     )
                     ->sort(),
-                UpdateAtTD::make(),
+                UpdatedAtTD::make(),
                 CreatedAtTD::make(),
                 ActionsTD::make(static fn(Media $media) : DropDown => DropdownOptions::make()
                     ->list([

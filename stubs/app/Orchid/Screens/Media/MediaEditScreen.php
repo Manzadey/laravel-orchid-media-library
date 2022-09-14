@@ -17,9 +17,6 @@ use Orchid\Support\Facades\Layout;
  */
 class MediaEditScreen extends EditScreen
 {
-    /**
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
     public function query(Media $media) : iterable
     {
         return $this->model($media);

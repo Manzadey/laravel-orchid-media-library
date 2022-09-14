@@ -6,11 +6,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use JetBrains\PhpStorm\ArrayShape;
 use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\Layouts\ModelLegendLayout;
-use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\Layouts\ModelMetricLayout;
 use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\Layouts\ModelTimestampsLayout;
 use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\Links\DeleteLink;
 use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\Links\DropdownOptions;
-use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\Links\DropdownRelations;
 use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\Links\EditLink;
 use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\Screens\ModelScreen;
 use Manzadey\LaravelOrchidHelpers\Orchid\Helpers\Sights\EntitySight;
@@ -91,7 +89,7 @@ class MediaShowScreen extends ModelScreen
                 Button::make(__('Регенерация'))
                     ->icon('reload')
                     ->method('regenerate', [
-                        'media' => $this->model->id,
+                        'media' => $this->model->getAttribute('id'),
                     ]),
                 EditLink::route('platform.media.edit', $this->model),
                 DeleteLink::makeFromModel($this->model),
@@ -145,11 +143,13 @@ class MediaShowScreen extends ModelScreen
 
     public function regenerate(Request $request, FileManipulator $fileManipulator) : RedirectResponse
     {
-        $media = Media::findOrFail($request->input('media'));
+        $media = Media::query()->find($request->input('media'));
 
-        $fileManipulator->createDerivedFiles($media);
+        if($media instanceof Media) {
+            $fileManipulator->createDerivedFiles($media);
 
-        Alert::success(__('Изображение обновлено!'));
+            Alert::success(__('Изображение обновлено!'));
+        }
 
         return back();
     }
