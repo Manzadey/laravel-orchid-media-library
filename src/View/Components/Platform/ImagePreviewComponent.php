@@ -6,7 +6,6 @@ namespace Manzadey\OrchidMediaLibrary\View\Components\Platform;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use Manzadey\OrchidMediaLibrary\Models\Media;
 
 class ImagePreviewComponent extends Component
 {
@@ -15,7 +14,7 @@ class ImagePreviewComponent extends Component
      *
      * @return void
      */
-    public function __construct(readonly public Media $media)
+    public function __construct(public $media)
     {
         //
     }
